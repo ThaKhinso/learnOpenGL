@@ -147,3 +147,7 @@ void shaderLoader::setBool(const std::string& name, bool value) const {
 void shaderLoader::setInt(const std::string& name, int value) const {
 	glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
 }
+
+void shaderLoader::setVec2(const std::string& name, float v1, float v2) const {
+	glUniform2f(glGetUniformLocation(shaderProgram, name.c_str()), v1, v2);
+};
