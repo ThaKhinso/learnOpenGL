@@ -6,8 +6,7 @@ in vec2 TexCoord;
 in vec2 ScreenUV;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
-uniform float time;
-
+uniform float rate;
 
 void main()
 {
@@ -19,5 +18,5 @@ void main()
 	//FragColor = texture(texture2, screenUV);
 	//float flicker = 1.0 - (sin(time * 20.0) * 0.1);
 	FragColor = mix(texture(texture1, TexCoord),
-					texture(texture2, vec2(1.0-TexCoord.x, 1.0-TexCoord.y)),0.2);
+					texture(texture2, vec2(TexCoord.x, TexCoord.y)),rate);
 }

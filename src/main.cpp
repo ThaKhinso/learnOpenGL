@@ -5,6 +5,8 @@
 #include "shaderLoader.h"
 #include "TextureLoader.h"
 
+float gArrow = 0.2f;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -13,7 +15,33 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
         glfwSetWindowShouldClose(window, true);
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        gArrow += 0.0005f;
+        if (gArrow > 1.0f)
+        {
+            gArrow = 1.0f;
+        }
+        if (gArrow < 0.f) {
+            gArrow = 0.f;
+        }
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        gArrow -= 0.0005f;
+        if (gArrow > 1.0f)
+        {
+            gArrow = 1.0f;
+        }
+        if (gArrow < 0.f) {
+            gArrow = 0.f;
+        }
+    }
 }
 
 
@@ -187,8 +215,8 @@ int main(void)
 
         /*shader1.useProgram();
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
-        float timeValue = glfwGetTime();
-		shader1.setFloat("time", timeValue);
+        
+		shader1.setFloat("rate", gArrow);
         shader1.useProgram();
         
         glBindVertexArray(VAO2);
